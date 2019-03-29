@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html>
+    <!-- 
+WELCOME USER! You've reached the source code for a manual created by STS. If you plan on updating or editing this manual, then you're in the right place!
+Before editing this manual, please read through the manual editing guide. It is important that we adhere to the conventions set in the guide in order to maintain quality and consistency across all manuals.
+A few things to note:
+* In order to have a working preview with accurate CSS and functional JavaScript, you will need a copy of the /master-files folder in the same parent directory as the folder with your manual editing files in it, e.g. if you have a folder on your desktop "STS Manuals", and you're editing the Excel 1 manual in the folder and the Photoshop 1 folder in the "photoshop1" folder, you will need to have the "master-files" folder in "STS Manuals" as well, since the manual files link to the CSS/Javascript using relative links. Your folder will look like this: 
+├STS Manuals 
+├╴╴excel1
+├╴╴╴╴╴images
+├╴╴╴╴╴class_files
+├╴╴master-files
+├╴╴photoshop1
+├╴╴╴╴╴images
+├╴╴╴╴╴class_files
+* Manuals should be arranged into Topics, which are enclosed in the <section class="topic"> tag, and followed immediately by an <h1> tag with the topic name in it, e.g.
+<section class="topic">
+<h1>Topic name</h1>
+<p>Neat and helpful information goes here</p>
+</section>
+The <section class="topic"> and following <h1> element are how the manual's JavaScript automagically builds the Topics outline and creates the links, so if they are not there, the manual will be without a table of contents and its friends will probably make fun of it (which is decidedly not cool).
+* Unless you are changing the contents of the <title></title> tag, you should not have to touch the <head> portion of this document (unless instructed to do so). This tag connects the HTML to the CSS and JavaScript that keep the manual functioning. Look for the comment tag that says "MAIN CONTENT", and you may edit there.
+Good luck, and have fun!
+-->
+
+    <head>
+        <!-- Manual title -->
+        <title>MATLAB 2</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Software manual provided by Software Training for Students at the University of Wisconsin.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='stylesheet' id='uwmadison-fonts-css' href='https://brand.wisc.edu/content/themes/uw-theme/dist/fonts/uw160/fonts.css?ver=1.1.1' type='text/css' media='all' />
+        <link rel="stylesheet" type="text/css" href="../master-files/css/stylesheet.css">
+        <script src="../master-files/highlight.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="../master-files/smooth-scroll.js"></script>
+        <script src="../master-files/primary-functions.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4370707-17"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-4370707-17');
+
+        </script>
+    </head>
+
+    <body>
+        <!-- begin front page -->
+        <div class="manual-front-page">
+            <div id="coverpage-title">
+                <h1>MATLAB 2</h1>
+                <h2>Advanced MATLAB</h2>
+            </div>
+            <div id="about-page"></div>
+            <div id="outline"></div>
+            <section class="topic">
+                <h1>Introduction</h1>
+                <p><strong>MATLAB</strong> is a powerful computing environment that is used in a variety of fields including mathematics, signal processing, financial modeling and statistical analysis. The content of this class covers only a narrow scope of MATLAB’s computational capabilities, but demonstrates many of the tools used in more advanced applications.
+                </p>
+                <h2>About this Class</h2>
+                <p>This class is an extension of MATLAB 1 that focuses on a single, complex application: the graphical simulation of a forest fire. This is accomplished using  programming  tools  both  new  to  this  course  and  those  introduced  previously.</p>
+                <h2>Prerequisites</h2>
+                <ul>
+                    <li>
+                        <p>A general knowledge of computers.</p>
+                    </li>
+                    <li>
+                        <p>MATLAB 1 or equivalent programming experience.</p>
+                    </li>
+                </ul>
+                <h2>Other requirements</h2>
+                <p>To use this manual, you will need a copy of the MATLAB 2 class files. These files can be found at “www.wisc.edu/sts”.</p>
+                <p>The required files are:</p>
+                <ul>
+                    <li>
+                        <p>forest_setup.m</p>
+                    </li>
+                    <li>
+                        <p>forest.m</p>
+                    </li>
+                    <li>
+                        <p>forest_finished.m</p>
+                    </li>
+                    <li>
+                        <p>neighbors_on_fire.m</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="topic">
+                <h1>Getting Started</h1>
+                <ol>
+                    <li>
+                        <p><strong>Copy and paste</strong> the folder containing the class files to a location of your choice.</p>
+                    </li>
+                    <li>
+                        <p><strong>Open</strong> the MATLAB Environment and familiarize yourself with the interface.</p>
+                    </li>
+                    <li>
+                        <p><strong>Navigate</strong> to the directory panel on the left and change the current directory to the location in which you have saved a copy of the class files.</p>
+                    </li>
+                    <li>
+                        <p>In the command window,<strong>type</strong> forest_finished and press enter. </p>
+                    </li>
+                </ol>
+                <p>This will run a completed script to give you a preview of the final product. A small window should pop up showing what appears to be a pixilated, animated aerial view of a forest fire (see below).</p>
+                <img src="images/finished.png" alt="finished">
+            
+                
+            </section>
+            <section class="topic">
+                <h1>Forest Fire Simulation</h1>
+                <h2>Class Files</h2>
+                <p>A file called <span class = "type-text">forest_setup.m</span> has already been created for you. It contains variable assignments which allow us to use numeric values for the color and state of the vegetation repeatedly with a simple name.</p>
+                <p>In other words, instead of remembering that the number 1 represents a patch with low vegetation, we can use the variable <span class = "type-text">low_veg</span>. The variables in our simulation range from 1 (low vegetation) to 7 (ash). The advantage of using this naming scheme of variables is that it will make our code much easier to write and read, and the colors can be easily changed.</p>
+                <p>A file called <span class = "type-text">forest.m</span> has an outline of what we will do today, called a “skeleton” of code. We will fill in what we need step by step. The top section sets up the parameters of the forest. The bottom section will do the simulation.</p>
+                <p><span class = "type-text">neighbors_on_fire.m</span> implements the computer logic needed to determine whether a particular patch of forest has a neighboring patch that is on fire. This code is beyond the scope of this class, so we will simply take for granted that it works correctly and use it later as needed.</p>
+ 
+            <h2>About the Forest</h2>
+            <p>The forest is an animation in which each new “frame” is determined by a set of rules. The rules take what the forest looks like in the current frame and use the information to compute what the next frame should look like. The goal of this class is to translate these rules into computer logic so that MATLAB can produce the animation we want.</p>
+            <p>The forest is made of many individual patches, each of which can exist in seven possible states:</p>
+            <ul>
+                <li>
+                    <p>Growing: <i>low vegetation state, mid vegetation state, high vegetation state</i></p>
+                </li>
+                <li>
+                    <p>Burning: <i>high fire state, mid fire state, low fire state</i></p>
+                </li>
+                <li>
+                    <p> <i>Ash state</i></p>
+                </li>
+            </ul>
+            <p>During each cycle of the simulation, states progress as follows:</p>
+            <ul>
+                <li>
+                    <p>Low vegetation always progresses to mid vegetation</p>
+                </li>
+                <li>
+                    <p>Mid vegetation always progresses to high vegetation</p>
+                </li>
+                <li>
+                    <p>High Fire always progresses to mid fire</p>
+                </li>
+                <li>
+                    <p>Mid fire always progresses to low fire</p>
+                </li>
+                <li>
+                    <p>Low fire always progresses to ash</p>
+                </li>
+            </ul>
+            <p>The two tricky states are the high vegetation and the ash state:</p>
+            <ul>
+                <li>
+                    <p>High vegetation will occasionally be struck by lightning and ignite</p>
+                </li>
+                <li>
+                    <p>High vegetation will occasionally ignite if one of its neighboring patches is on fire</p>
+                </li>
+                <li>
+                    <p>Ash will occasionally grow into low vegetation</p>
+                </li>
+            </ul>
+            <h2>Parameters of the Simulation</h2>
+            <p>Parameters are the numbers we use to tell MATLAB the properties of the system, specifically the size of the forest and how it should look when the simulation begins.</p>
+            <p>How often high vegetation catches fire and how often ash turns to vegetation can be defined using the idea of probability. If we specify a probability for each of those events, we can later use that to determine how a particular patch should progress.</p>
+            <h2>Initializing the Simulation</h2>
+            <h3>Loading in variables</h3>
+            <p>The forest simulation uses a group of variables</p>
+            <ol>
+                <li>
+                    <p><strong>Enter</strong> <span class = "type-text">close all</span> and <span class = "type-text">clear all</span> at the top of the <span class = "type-text">forest.m script</span></p>
+                    <p>This will clear out any old variables or graphs you may have left over from previous programs.</p>
+                </li>
+                <li>
+                    <p><strong>Enter</strong> <span class = "type-text">forest_setup</span> to setup the variables for the simulation.</p>
+                </li>
+            </ol>
+            <h3>Forest Size</h3>
+            <p>We first need to determine the size of the forest. In programming, it is good practice to name any special numbers with a variable, especially if you plan to use it repeatedly or change it later. Let’s start off our code by defining the size of the forest. We will make it a square forest, that is, the sides will both be the same length. For this reason, we only need to store one number as a variable for forest size.</p>
+            <ol>
+                <li>
+                    <p><strong>Enter</strong> <span class = "type-text">forest_size = 500</span>; in the <span class = "type-text">forest.m file.</span></p>
+                </li>
+            </ol>
+            <p>Recall that the semicolon suppresses output to the command window.</p>
+            <h3>Specifying start states</h3>
+            <p>We also need to specify the possible starting states, or initial conditions, for the patches in the forest. That is: do we want the whole forest to start as ash, low vegetation, something else, or some combination?</p>
+            <p>Recall from MATLAB 1 that an array is a systematic way for MATLAB to store data in two dimensions. You can visualize this as a table, where each cell corresponds to a unique position in the table, specified by row number and column number. This array, which will begin as a collection of start states and then cycle to different states according to our rules, will ultimately be used to create an animation.</p>
+            <p>Suppose we want the forest to begin such that any particular patch is either low vegetation, medium vegetation, or high vegetation on a purely random basis</p>
+            <ol>
+                <li><p>Recall Possible States</p></li>
+                <p>We have three possible choices for starting our forest: low, medium, or high vegetation. If you look in <span class = "type-text">forest_setup.m</span> you can see that these states are the first 3 values in the <span class = "type-text">states</span> array. Therefore we can use MATLAB’s built in random integer generator function, <span class = "type-text">randi</span>, to start our new <span class = "type-text">forest</span> array with one of those three values: in other words, a random integer less than or equal to 3.</p>
+                <li><p>Create and Populate a New Array</p></li>
+                <p>Create an array of the specified size and populate it with values chosen randomly from integers less than or equal to 3. This can be accomplished with the function <span class = "type-text">randi</span>, where the first “argument” between the parentheses is the upper limit of integers we can choose from, and the values inside the brackets correspond to the dimensions of the <span class = "type-text">forest</span> array.</p>
+                <li><p><strong>Enter</strong> <span class = "type-text">forest = randi(3, [forest_size, forest_size])</span> in your script.</p></li>
+            </ol>
+            <h2>Using Probability to Determine New State</h2>
+            <p>We can later use this idea of selecting randomly to our advantage by incorporating probability. If we define what probability a patch of ash has of turning into new vegetation, we can determine which ash patches are “lucky” by assigning each one a random value and comparing that to the probability.</p>
+            <p>For example, if we say that some ash has a 30% chance of turning into vegetation, we can assign each patch of ash a random number between 0 and 100, and any patch which ends up with a number less than or equal to 30 is “lucky” and turns into new vegetation. All others remain as ash.</p>
+            <p>For now, all we have to do is define these probabilities as variables. We’ll use them later. Let’s say that the probabilities are as follows:</p>
+            <ul>
+                <li><p>Probability of high vegetation being struck by lightning: 0.001%</p></li>
+                <li><p>Probability of high vegetation catching fire from neighboring patch: 25%</p></li>
+                <li><p>Probability of ash turning to low vegetation: 0.1%</p></li>
+            </ul>
+            <p>Feel free to use your own numbers.</p>
+            <h3>Filling in the Code</h3>
+            <p>The probabilities simply need to be filled out. The names are already specified for you, because some of the class files require those exact names to work.</p>
+            <pre><code class = "hljs php">%Probabilities<br>  probability_of_lightning = .00001;<br>  probability_of_spread = .25;<br>  probability_of_growth = .001;</code></pre>
+            <h2>Drawing the Forest</h2>
+            <p>To visualize the forest, we will use the image function. The function creates a graph and displays one square for each value in the matrix. The color of the square is determined by the value of that position in the matrix.</p>
+            <ol>
+                <li><p><strong>Enter </strong> <span class = "type-text">img = image(forest);</span></p></li>
+                <p>The right hand side of the equation will create the graph. Once the graph is created, it assigns a handle (or a reference) to the variable on the left, img. We do this so that we can later refer to the graph using the variable img.</p>
+                <p>We now have an image of the forest, but the colors are not representative of the patches. We can adjust what value (or in our case state) relates to which color through the use of the colormap function. The color map function requires a list of colors (in a column) that will correspond to a value. The list of colors increases from 1 to the maximum value of the matrix (in our case, 7). That means that we need to specify 7 color values. MATLAB understands colors numerically (as RGB values), so for convenience, forest_setup.m has created variable names for the colors we will use.</p>
+                <li><p><strong>Enter </strong> <span class = "type-text">forest_setup.m</span> and <strong>Enter</strong> the following code:</p></li>
+                <pre><code class = "hljs php">map = [light_green; mid_green; high_green; yellow; orange; red; black];</code></pre>
+                <p>Once we’ve created the map, we can pass the map to the colormap function.</p>
+                <li><p><strong>Enter </strong><span class = "type-text">colormap(map);</span></p></li>
+            </ol>
+
+
+            
+        </section>
+    <section class="topic">
+        <h1>Control Logic</h1>
+        <h2>Boolean Logic and If-Statements</h2>
+        <p>As you may recall from the data types discussed in MATLAB 1, Boolean data can only hold one of two possible values: true or false. This idea can be used in computer language so that certain parts of code will only execute if a particular set of conditions is true or false.</p>
+        <h3>Guessing Game</h3>
+        <p>As a simple demonstration of this, let’s play a guessing game with MATLAB, similar to the guessing game you may have played as a child. You will choose a number and assign it to a variable. Then we will have MATLAB generate a random number and assign it to a different variable. MATLAB can perform a simple test to see if the two are equal. If the result of that test is true, we will display a congratulatory message in the command window. It will be easiest to do this by creating a new script to contain the code.</p>
+        <ol>
+            <li><p><strong>Create</strong> a new script called <span class = "type-text">guess.m</span></p></li>
+            <li><p><Strong>Pick</Strong> Numbers and <strong>Assign</strong> Them to Variables</p></li>
+            <pre><code class = "hljs php">guess = 5;<br>    truth = randsrc(1,1, [1:10]);<br>    truth = randi(10, [1,1]);<br>    truth= 10*rand(1);</code></pre>
+            <li><p><strong>Use</strong> Boolean Operators and If-Statements to Decide Output</p></li>
+            <pre><code class = "hljs php">if (guess==truth)<br>    display(‘Congratulations!’);<br>end<br>if (guess ~= truth)<br>    display(‘Try again.’);<br>end</code></pre>
+        </ol>
+        <h2>Advanced Boolean Operators</h2>
+        <p>Other Boolean operators will be used in the forest fire to determine whether a condition is true or false. Feel free to experiment with the following.</p>
+        <h3>Less-Than/Greater-Than Operators</h3>
+        <ol>
+            <li><p>The less-than operator tests if the first value is less than the second value.</p>
+                <ul>
+                    <li><p><span class = "type-text">1 &lt; 5</span> is true</p></li>
+                    <li><p><span class = "type-text">7 &lt; 2</span> is false</p></li>
+                </ul>
+            </li>
+            <li><p>The greater-than operator tests if the first value is greater than the second value.</p>
+                <ul>
+                    <li><p><span class = "type-text">1 &gt; 5</span> is false</p></li>
+                    <li><p><span class = "type-text">7 &gt; 2</span> is true</p></li>
+                </ul>
+            </li>
+        </ol>
+        <h3>AND/OR Operators</h3>
+        <ol>
+                <li><p>The <span class = "type-text">AND</span> operator tests to see if all conditions listed are true.</p>
+                    <ul>
+                        <li><p><span class = "type-text">1 &lt; 5 &amp;&amp; 2 &lt; 7</span> is true</p></li>
+                        <li><p><span class = "type-text">1 &lt; 5 &amp;&amp; 2 &gt; 7</span> is false</p></li>
+                    </ul>
+                </li>
+                <li><p>The <span class = "type-text">OR</span> operator tests to see if any of the conditions listed are true.</p>
+                    <ul>
+                        <li><p><span class = "type-text">1 &lt; 5 || 2 &lt; 7</span> is true</p></li>
+                        <li><p><span class = "type-text">1 &lt; 5 || 2 &gt; 7</span> is true</p></li>
+                    </ul>
+                </li>
+        </ol>
+        <h2>Application</h2>
+        <p>We will be using if statements to direct the progression of the forest. That is, we want different things to happen depending on what state a given patch is in. We know that the <span class = "type-text">high_veg</span> and <span class = "type-text">ash</span> states are going to be special states, so they will each have their own section (using an <span class = "type-text">if</span> and <span class = "type-text">elseif</span>). The rest of the states will be treated the same, so they can all go in the else. We can make the general outline now and then we will fill it in as we learn more.</p>
+        <ol>
+            <li><p><strong>Enter</strong> the following code in the <span class = "type-text">forest.m</span> script.</p></li>
+            <pre><code class = "hljs php">if (state == high_veg)  %deal with the high vegetation state<br>elseif (state == ash)  %deal with the ash state<br>else %deal with the other states<br>end</code></pre>
+        </ol>
+</section>
+<section class="topic">
+    <h1>Loops</h1>
+    <h2>For-Loops in MATLAB</h2>
+    <p>A loop is another control structure that repeats a segment of code a certain number of times. MATLAB’s loops are different from other languages in a few crucial ways.</p>
+    <p>A MATLAB loop just cycles through values in an array. So for instance, if we have an array with five values in it, the loop will occur five times. During each of cycle of the loop, the loop variable will be assigned one of those values.</p>
+    <p>For example:</p>
+    <pre><code class = "hljs php">prime = [2 3 5 7 11];<br>for ii = prime<br>    display(ii)<br>end</code></pre>
+    <p>This example will print out the values of the array prime. During each cycle, the next value of the array is passed to the ii variable.</p>
+    <p>People often use i and j as the loop variables (traditionally, i and j are used; but in MATLAB, i and j are the imaginary number sqrt(-1)). Some people use m and n in MATLAB.</p>
+    <p>More commonly, people will create the array directly in the for statement. For example:</p>
+    <pre><code class = "hljs php">for ii = 1:20<br>    display(ii)<br>end</code></pre>
+    <p>Remember, that the colon operator is used to fill an array. In this case, the array has number from 1 to 20 (the increment valued is assumed to be 1 if it isn’t specified).</p>
+    <h2>Vectorization in MATLAB</h2>
+    <p>Loops are a necessary tool in all languages, but some practices (and ways of thinking) with loops don’t work well in MATLAB. For instance, in other languages, the way to simulate our Forest Fire would be to loop through every patch and then adjust its state. That is not the optimal way to use loops in MATLAB.</p>
+    <p>Since MATLAB is built to be a matrix language, it relies upon the idea of vectorization to be fast. Vectorization is the process of preforming operations on a vector of values all at once.</p>
+    <p>A simple example of this can be seen if you want to find the difference between each value in an array (maybe to check for duplicates, for instance).</p>
+    <pre><code class = "hljs php">array = randsrc(100,1,[1:10]); %creates an array of 100 random values<br>array = randi(10,[1,1]);<br>for ii = 2:length(array) %will go through every value of the array<br>    minus_prev_array(ii-1) = array(ii) – array(ii-1);<br>end</code></pre>
+    <p>The indices of the arrays have to be adjusted to ensure that there is no error. However, this entire loop can be condensed (and optimized) by using the built in function diff.</p>
+    <pre><code class = "hljs php">minus_prev_array = diff(array);</code></pre>
+    <P>Whenever you are using a loop in MATLAB, make sure that there is no way to vectorize. We still do need to make use of a loop in our simulation though. But instead of looping through the patches of the forest, we will loop through the different states of the forest (only 7 values). We can pass each of those states then to the if statement that we already set up.</P>
+    <p>Let’s see how this will work.</p>
+    <pre><code class = "hljs php">for state = fliplr(states) %take each state (one at a time)<br>    %Code created earlier<br>end</code></pre>
+    <p>Finally, we will also use a loop to determine the number of cycles we want in our simulation. This loop will surround the loop we just created.</p>
+    <pre><code class = "hljs php">num_cycles = 100;<br>for ii = 1:num_cycles  %our code so far<br>end</code></pre>
+</section>
+<section class="topic">
+    <h1>Logical Indexing</h1>
+    <p>As we’ve seen, MATLAB has more efficient tools than using loops. One of the most useful is the idea of logical indexing (LI). We can make use of logical indexing in our forest example. The idea of LI is that you can selectively manipulate values of a matrix. In our example, we will want to select all of the patches of the matrix that our in the <span class = "type-text">low_veg</span> state and transform them to the <span class = "type-text">mid_veg</span> state.</p>
+    <p>To use logical indexing, you need to have some Boolean equation. In our case, that could be <span class = "type-text">forest == low_veg</span>. The return of that Boolean equation will serve as our indices. In other words, <span class = "type-text">forest(forest == low_veg)</span> will return every patch in the forest that is in a state of low vegetation.</p>
+    <h2>Application</h2>
+    <h3>Vectorization to Change State of Every Patch</h3>
+    <p>Let’s add in the code. Remember, this will go in the else statement, since we are only dealing with the easy states (not the high_veg or the ash state).</p>
+    <ol>
+        <li><p>For “normal” cases, progress to next state in cycle</p></li>
+        <p>Let’s add in the code. Remember, this will go in the else statement, since we are only dealing with the easy states (not the <span class = "type-text">high_veg</span> or the <span class = "type-text">ash</span> state).</p>
+        <pre><code class = "hljs php">forest( forest == low_veg) = mid_veg;<br>forest(forest == mid_veg) = high_veg;</code></pre>
+        <p>We can generalize this code further to have it encompass all of the different states (except for the high_veg and the ash state), as we loop through them. Remember that the loop variable (state) will take each of those values.</p>
+        <pre><code class = "hljs php">forest(forest== 1) = 2;<br>forest(forest ==2) = 3;<br>forest( forest == state) = state + 1;</code></pre>
+        <li><p>Use probability to determine next state for special cases</p></li>
+        <p>We can also use logical indexing to deal with the <span class = "type-text">ash</span> and <span class = "type-text">high_veg</span> states. But since these involve a probability, we will need to use multiple logical statements.</p>
+        <p>One way to get something with a certain probability is to generate a random number (between 0 and 1) and see if that random number is below your probability. You may recall this principle from earlier.</p>
+        <p>For example:</p>
+        <pre><code class = "hljs php">  if rand &lt; .75<br>       display(‘Success’);<br>  end</code></pre>
+        <p>Approximately three out of four times, when you run that it will display ‘success.’ When we are dealing with the ash, we will use the same principle that we just saw to find which ash patches will regrow to <span class = "type-text">low_veg</span>.</p>
+        <p>In English, we want to find every patch that is ash and has a value less than the probability of regrowth and make that low_veg.</p>
+        <p>We know how to do this without the probability section.</p>
+        <pre><code class = "hljs php">  forest( forest == ash) = low_veg;</code></pre>
+        <p>We can add in the probability, by using a big random matrix (and again seeing where it is below the probability value).</p>
+        <pre><code class = "hljs php">  rand(size(forest)) &lt; probability_of_regrowth;</code></pre>
+        <p>The rand function creates a matrix of the size of the forest.</p>
+        <p>To find where both of those statements are true, we can use the &amp; statement.</p>
+        <p>A single &amp; instead of the dual &amp;&amp; works as an element-wise comparison. It is the same idea as dot-operator.</p>
+        <p>Dot operator recap:</p>
+        <ul>
+            <li><p><span class = "type-text">matrix^2</span> does matrix multiplication</p></li>
+            <li><p><span class = "type-text">matrix.^2</span> squares each element</p></li>
+        </ul>
+        <pre><code class = "hljs php">forest(forest == ash &amp; rand(size(forest)) &lt; probability_of_regrowth) = low_veg;</code></pre>
+        <p>The <span class = "type-text">high_veg</span> state has two components to it. We need to check if any neighbors are on fire or if it gets struck by lightning. We know how to check if it is struck by lightning, because it is the same process of being regrown from ash.</p>
+        <pre><code class = "hljs php">forest(forest == high_veg &amp; rand(size(forest)) &lt; probability_of_lightning) = high_fire;</code></pre>
+        <p>The next step is similar, but we need to check if any neighbors are on fire (and then again, include the probability section). To check if the neighbors are on fire, we will used a prewritten function (by the instructor) called <span class = "type-text">neighbors_on_fire</span>. This function creates a matrix that can be used as a logical index (the same way that <span class = "type-text">rand(size(forest)) &lt; probability</span> does). So, this time we need to combine three matrices to form the logical index. We need the <span class = "type-text">forest == high_veg</span> and the <span class = "type-text">rand(size(forest)) &lt; probability_of_spread</span> and the <span class = "type-text">neighbors_on_fire matrices</span>.</p>
+        <pre><code class = "hljs php">forest( forest == high_veg &amp; rand(size(forest)) &lt;<br> probability_of_spread &amp; neighbors_on_fire(forest)) = high_fire;</code></pre>
+    </ol>
+</section>
+<section class="topic">
+    <h1>Animation</h1> 
+    <p>We now have our simulation. But if we were to run this, the graph would not update at all (in fact, it would freeze for a while and then start working after our program completed). To animate the graph, we need to explicitly state this.</p> 
+    <p>To do this, we can update the color information of the image (because the color is the only thing that is changing, not the size). Remember that earlier we assigned our image to the variable img; we will now be able to use that variable to update the graph.</p>
+    <pre><code class = "hljs php">  set(img, ‘CDATA’, forest);<br>  drawnow</code></pre>
+    <p>The set function is used to change the properties of an object (in our case of the graph). We want to change the CDATA property, which contains all of the color information.</p>
+</section>
+<section class="topic">
+    <h1>Wrapping it Up</h1>  
+    <p>The final addition to our simulation will be an option to stop the simulation. We can have the simulation continue infinitely with something called a while loop. A while loop is a combination of a for loop and an if statement. It will continue to loop, until the condition is no longer true. In our situation, we can ask (after every set of 1000 cycles) if the user wants to quit.</p>
+    <p>To add in this while loop, we can surround all of our simulation code with the following statements.</p>
+    <pre><code class = "hljs php">while quit ~= ‘y’<br>%all of our code<br>end</code></pre>
+    <p>Now our code will continue to function as long as the quit variable does not equal ‘y’. This means that we first need to set the quit variable to something other than ‘y’ and then we need to ask the user if s/he wants to quit.</p>
+    <pre><code class = "hljs php">quit = ‘n’<br>while quit ~= ‘y’<br>%our code<br>quit = input(‘Do you want to quit? (y/n)’, ‘s’);<br>end</code></pre>
+</section>
+<section class="topic">
+    <h1>Conclusion</h1>
+    <p>MATLAB has a tremendous amount of applications from biology to aerospace. The best way to learn is by doing. So explore implementing MATLAB in your field. If you ever encounter difficulties, there are many resources online and individual Ask-A-Trainer consultations are available through STS. </p>
+</section>
+</section>
+</section>
+</div>
+<!-- END MAIN CONTENT -->
+</body>
+
+</html>
